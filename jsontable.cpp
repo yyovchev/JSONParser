@@ -35,6 +35,7 @@ void jsonTable::remove(const String &string)
         if (data[i].name == string)
         {
             delete data[i].json;
+            data[i].json = nullptr;
             Vector::remove(i);
             return;
         }
