@@ -1,0 +1,16 @@
+#ifndef JSONTYPE_H
+#define JSONTYPE_H
+
+
+class JSONType
+{
+public:
+    virtual ~JSONType();
+
+    virtual JSONType* clone()const = 0;
+    virtual getElement(const char *index)const = 0;
+    
+
+};
+
+#endif // JSONTYPE_H
