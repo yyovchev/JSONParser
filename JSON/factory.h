@@ -22,6 +22,8 @@ class Factory
 public:
     static JSONObj* CreateFromFile(const char *filname);
     static JSONObj* CreateFromFile(const String &filename);
+    static JSONType* CreateFromString(const char *string);
+    static JSONType* CreateFromString(const String &string);
 
     static JSONObj* CreateJSONObject();
 
@@ -37,6 +39,7 @@ private:
     static TypeNumber* CreateNumber();
     static JSONType* CreateWordType();  //true,false,null
     static JSONArray* CreateArray();
+    static void initString(const String &str);
 
 private:
     static String jsFile;

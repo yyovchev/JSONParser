@@ -24,13 +24,35 @@ JSONObj* Factory::CreateFromFile(const String &filename)
     file.close();
 
     if(jsFile[cur] != '{')
-        throw std::invalid_argument("invalid file content");
+        throw std::invalid_argument("invalid file content >> { exp");
 
     size = jsFile.getSize();
 
     obj = CreateJSONObject();
 
-   return obj;
+    return obj;
+}
+
+JSONType *Factory::CreateFromString(const char *string)
+{
+    return CreateFromString(String(string));
+}
+
+JSONType *Factory::CreateFromString(const String &string)
+{
+    JSONType* obj;
+
+    cur = 0;
+    initString(string);
+
+    if(jsFile[cur] != '{')
+        throw std::invalid_argument("invalid file content >> { exp");
+
+    size = jsFile.getSize();
+
+    obj = CreateNewItemValue();
+
+    return obj;
 }
 
 JSONObj* Factory::CreateJSONObject()
@@ -99,6 +121,7 @@ String Factory::ItemKey()
 
 void Factory::init(std::istream &in)
 {
+    jsFile = "";
     char ch;
     bool instr = 0;
     while(!in.eof() && in.good()){
@@ -234,4 +257,21 @@ JSONArray* Factory::CreateArray(){
     }
     ++cur;
     return arr;
+}
+
+void Factory::initString(const String &str)
+{
+    jsFile = "";
+    char ch;
+    bool instr = 0;
+    int size = str.getSize();
+    for(int i = 0;i<size; i++){
+        ch = str[i];
+
+        if (ch == '\"' && jsFile[jsFile.getSize()-1] != '\\')
+            instr ^= 1;
+
+        if (ch != '\n' && (ch !=' ' || instr))
+           jsFile+=ch;
+    }
 }

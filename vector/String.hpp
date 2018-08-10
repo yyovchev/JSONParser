@@ -3,6 +3,7 @@
 
 #include "Vector.hpp"
 #include <cstring>
+#include <istream>
 
 class String : public Vector<char>
 {
@@ -56,16 +57,16 @@ public:
     operator char*()const {
         return data;
     }
-    bool operator ==(const String &other){
+    bool operator ==(const String &other)const{
         return !strcmp((char*)(*this) ,(char*)(other));
     }
-    bool operator ==(const char *str){
+    bool operator ==(const char *str)const{
         return !strcmp((char*)(*this) , str);
     }
-    bool operator !=(const String &other){
+    bool operator !=(const String &other)const{
         return !(*this == other);
     }
-    bool operator !=(const char *str){
+    bool operator !=(const char *str)const{
         return !(*this == str);
     }
 };
