@@ -79,7 +79,13 @@ JSONObj* Factory::CreateJSONObject()
 
         JSONItem item(key, value);
         delete value;
-        obj->addItem(item);
+
+        try{
+            obj->addItem(item);
+        }
+        catch(std::exception &e){
+            std::cout<<e.what()<<std::endl;
+        }
     }
     ++cur;
     return obj;

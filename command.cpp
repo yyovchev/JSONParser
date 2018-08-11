@@ -76,6 +76,7 @@ Vector<String> Command::getKeys(const String &string)const
             key.append(ch);
         }
         ++cur;
+        key.append('\0');
         keys.append(key);
     }
 

@@ -89,7 +89,7 @@ bool JSONArray::isKeyValid(const String &key) const
 {
     int size = key.getSize();
 
-    for(int i = 0; i < size; ++i)
+    for(int i = 0; i < size && key[i]; ++i)
         if (key[i]<= '0' || key[i]>='9')
             return false;
 

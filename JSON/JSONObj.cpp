@@ -79,6 +79,18 @@ void JSONObj::setOnKey(const String &key,JSONType *newValue)
 void JSONObj::addItem(const JSONItem &newItem)
 {
     JSONItem *item = new JSONItem(newItem);
+
+    int index = checkID(newItem.getKey());
+
+    String msg("Warning: 2 or more items with same key : ");
+    msg+= newItem.getKey();
+
+    if (index > -1){
+        String msg("Warning: 2 or more items with same key : ");
+        msg+= newItem.getKey();
+        throw std::invalid_argument(msg);
+    }
+
     items.append(item);
 }
 
@@ -99,6 +111,7 @@ int JSONObj::checkID(const String &str) const
         if (items[i]->getKey() == str)
             return i;
     }
+
     return -1;
 }
 
