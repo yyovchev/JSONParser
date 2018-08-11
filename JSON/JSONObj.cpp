@@ -64,6 +64,18 @@ void JSONObj::print(std::ostream &out, bool pretty, int offset) const
 
 }
 
+void JSONObj::setOnKey(const String &key,JSONType *newValue)
+{
+    int size = this->items.getSize();
+
+    for(int i = 0; i<size; i++){
+        if (items[i]->getKey() == key){
+            items[i]->setValue(newValue);
+            return;
+        }
+    }
+}
+
 void JSONObj::addItem(const JSONItem &newItem)
 {
     JSONItem *item = new JSONItem(newItem);

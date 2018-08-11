@@ -28,7 +28,7 @@ void Menu::execute()
         cin>>input;
         if (!std::cin.good()) {
             cin.clear();
-            cin.ignore(1200, '\n');
+            cin.ignore(64, '\n');
             cout << "Problem with input, try again!\n";
             continue;
         }
@@ -47,8 +47,11 @@ void Menu::execute()
                     commands[i]->execute(usedJsons);
                     m = false;
                 }
-                if(m)
+                if(m){
                     cout<<input<<" not a valid command\n";
+                    cin.clear();
+                    cin.ignore(65, '\n');
+                }
             }
         cout<<"\n";
     } while (!this->quit);

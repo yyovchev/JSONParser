@@ -21,6 +21,7 @@ public:
     virtual JSONType* getElement(const String &key);
     virtual const JSONType* getElement(const String &key) const;
     virtual void print(std::ostream &out,bool pretty = true, int offset = 0) const;
+    virtual void setOnKey(const String &key,JSONType *newValue);
 
     void addItem(const JSONItem& newItem);
 

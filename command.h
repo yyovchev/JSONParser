@@ -21,8 +21,6 @@ public:
 
 protected:
     JSONType* getElement(const String &string, jsonTable &jt)const;
-
-private:
     Vector<String> getKeys(const String &string)const;
 
 private:

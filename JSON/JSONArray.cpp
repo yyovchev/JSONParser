@@ -71,6 +71,14 @@ void JSONArray::print(std::ostream &out,bool pretty, int offset) const
     out<<"]";
 }
 
+void JSONArray::setOnKey(const String &key, JSONType *newValue)
+{
+    int size = items.getSize();
+    int index = parseKey(key);
+    delete items[index];
+    items[index] = newValue->clone();
+}
+
 void JSONArray::addItem(JSONType *item)
 {
     JSONType *new_value = item->clone();

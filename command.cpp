@@ -31,8 +31,6 @@ JSONType* Command::getElement(const String &string, jsonTable &jt) const
     keys[0].append('\0');
     JSONType *json = jt.find(keys[0]);
 
-    std::cout<<keys[0]<<std::endl;
-
     if(!json)
         throw std::invalid_argument(keys[0] + ": json is not created!");
 
@@ -42,13 +40,11 @@ JSONType* Command::getElement(const String &string, jsonTable &jt) const
     int size = keys.getSize();
 
     for (int i = 1; i<size; ++i){
-        keys[i].append('\0');
         json = json->getElement(keys[i]);
 
         if(!json)
             throw std::invalid_argument(keys[i] + ": key not found!");
     }
-
 
     return json->clone();
 }

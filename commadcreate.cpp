@@ -37,8 +37,8 @@ void CommadCreate::execute(jsonTable &jt) const
             json = getElement(con,jt);
         else{
             std::cout<<"<jsonName> -f <filename>  --- load from file\n"
-                     <<"<jsonName> -t <text>  --- load from text\n"
-                     <<"<jsonName> -n  --- empty obj\n";
+                     <<"<jsonName> -t <text>      --- load from text\n"
+                     <<"<jsonName> -j <json>      --- empty obj\n";
             return;
         }
     }
@@ -48,7 +48,7 @@ void CommadCreate::execute(jsonTable &jt) const
     }
 
     JSONVar var;
-    var.json = json;
+    var.json = json->clone();
     var.name = name;
     var.name.append('\0');
 
@@ -60,8 +60,6 @@ void CommadCreate::execute(jsonTable &jt) const
         delete json;
         return;
     }
-
-    delete json;
 
     std::cout<<name<<" was created\n";
 }

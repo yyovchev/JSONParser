@@ -19,6 +19,7 @@ public:
     virtual JSONType* getElement(const String &key);             // key must be a number
     virtual const JSONType* getElement(const String &key) const; // key must be a number
     virtual void print(std::ostream &out, bool pretty = true, int offset = 0) const;
+    virtual void setOnKey(const String &key,JSONType *newValue);
 
     void addItem(JSONType *item);
 

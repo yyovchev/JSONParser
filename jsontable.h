@@ -22,8 +22,6 @@ public:
     JSONVar& operator =(const JSONVar &other)
     {
         name = other.name;
-        if (json)
-            delete json;
         json = other.json->clone();
         return *this;
     }

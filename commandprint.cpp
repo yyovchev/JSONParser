@@ -28,11 +28,7 @@ void CommandPrint::execute(jsonTable &jt) const
         return;
     }
 
-    if(json)
-        json->print(std::cout);
-    else
-        std::cout<<name<<" is not created \n";
-    std::cout<<std::endl;
+    json->print(std::cout);
 }
 
 static CommandPrint ommandPrint;

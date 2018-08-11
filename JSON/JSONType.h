@@ -19,6 +19,7 @@ public:
     virtual const JSONType* getElement(const String &index)const = 0;
 
     virtual void print(std::ostream &out, bool pretty = true, int offset = 0)const = 0;
+    virtual void setOnKey(const String &key,JSONType *newValue) = 0;
     JSONType* operator[](const String &string) ;
     const JSONType* operator [](const String &string)const;
 };

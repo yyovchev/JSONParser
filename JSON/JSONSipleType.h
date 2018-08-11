@@ -14,6 +14,7 @@ public:
 
     virtual JSONType* getElement(const String &index);
     virtual const JSONType* getElement(const String &index)const;
+    virtual void setOnKey(const String &key, JSONType *newValue);
 
 };
 
