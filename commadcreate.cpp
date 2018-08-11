@@ -33,6 +33,8 @@ void CommadCreate::execute(jsonTable &jt) const
             json = Factory::CreateFromFile(con);
         else if(t == "-t")
             json = Factory::CreateFromString(con);
+        else if(t == "-j")
+            json = getElement(con,jt);
         else{
             std::cout<<"<jsonName> -f <filename>  --- load from file\n"
                      <<"<jsonName> -t <text>  --- load from text\n"

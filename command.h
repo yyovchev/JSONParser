@@ -1,10 +1,12 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
+#include "vector/Vector.hpp"
 #include "vector/String.hpp"
 #include "jsontable.h"
 
 #include <iostream>
+#include <exception>
 
 
 class Command
@@ -16,6 +18,12 @@ public:
     virtual void execute(jsonTable &jt)const = 0;
 
     const String& getName()const;
+
+protected:
+    JSONType* getElement(const String &string, jsonTable &jt)const;
+
+private:
+    Vector<String> getKeys(const String &string)const;
 
 private:
     String cmdString;

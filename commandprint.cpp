@@ -16,11 +16,17 @@ CommandPrint::~CommandPrint()
 
 void CommandPrint::execute(jsonTable &jt) const
 {
-    char name[128];
+    char name[200];
     std::cin>>name;
-    String Name(name);
 
-    JSONType *json = jt.find(Name);
+    JSONType *json = nullptr;
+    try{
+        json = getElement(name, jt);
+    }
+    catch(std::exception &e){
+        std::cout<<e.what()<<std::endl;
+        return;
+    }
 
     if(json)
         json->print(std::cout);

@@ -20,3 +20,13 @@ const JSONType* JSONType::getElement(const char *index)const
     String inx(index);
     return getElement(inx);
 }
+
+JSONType* JSONType::operator [](const String &string)
+{
+    return getElement(string);
+}
+
+const JSONType* JSONType::operator [](const String &string)const
+{
+    return getElement(string);
+}
