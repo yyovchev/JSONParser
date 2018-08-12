@@ -34,10 +34,7 @@ void CommandSearch::execute(jsonTable &jt) const
     json->search(srch,Key);
 
 
-    JSONVar var;
-    var.json = srch->clone();
-    var.name = newname;
-    var.name.append('\0');
+    JSONVar var(newname, srch);
 
     try{
         jt.add(var);

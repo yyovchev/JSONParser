@@ -17,7 +17,6 @@ JSONObj* Factory::CreateFromFile(const String &filename)
        throw std::invalid_argument("File err");
 
     JSONObj* obj;
-    jsFile = "";
     cur = 0;
 
     init(file);
@@ -42,9 +41,9 @@ JSONType *Factory::CreateFromString(const String &string)
 {
     JSONType* obj;
 
-    cur = 0;
     initString(string);
 
+    cur = 0;
     size = jsFile.getSize();
 
     obj = CreateNewItemValue();
@@ -62,7 +61,7 @@ JSONObj* Factory::CreateJSONObject()
             throw std::invalid_argument ("Broken object");
 
         if (jsFile[cur] != ',' && jsFile[cur] != '{')
-            throw std::invalid_argument ("Broken object");
+            throw std::invalid_argument ("Broken object ... missing ,");
 
         if(jsFile[cur + 1] == '}'){
             ++cur;
@@ -115,10 +114,14 @@ JSONType* Factory::CreateNewItemValue()
 String Factory::ItemKey()
 {
     String key;
-    while(jsFile[cur] != ':'){
+    while(cur <size && jsFile[cur] != ':'){
         key += jsFile[cur];
         ++cur;
     }
+
+    if (cur >= size)
+        throw std::invalid_argument("Broken json missing separator");
+
     return key;
 }
 

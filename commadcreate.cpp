@@ -47,17 +47,14 @@ void CommadCreate::execute(jsonTable &jt) const
         return;
     }
 
-    JSONVar var;
-    var.json = json->clone();
-    var.name = name;
-    var.name.append('\0');
+    JSONVar var(name, json);
+    delete json;
 
     try{
         jt.add(var);
     }
     catch(std::exception &e){
         std::cout<<e.what()<<std::endl;
-        delete json;
         return;
     }
 

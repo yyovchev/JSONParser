@@ -16,6 +16,11 @@ public:
     JSONVar()
         : json(nullptr)
     {}
+    JSONVar(const String &key, const JSONType *value){
+        name = key;
+        this->name.append('\0');
+        json = value->clone();
+    }
     ~JSONVar()
     {}
 
