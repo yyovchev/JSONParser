@@ -76,6 +76,19 @@ void JSONObj::setOnKey(const String &key,JSONType *newValue)
     }
 }
 
+void JSONObj::search(JSONType *fidnValues, const String &key) const
+{
+    int size = this->items.getSize();
+
+    for (int i = 0; i<size; i++){
+        if (items[i]->getKey() == key){
+            fidnValues->addItem(items[i]->getValue());
+    }
+        items[i]->getValue()->search(fidnValues, key);
+    }
+
+}
+
 void JSONObj::addItem(const JSONItem &newItem)
 {
     JSONItem *item = new JSONItem(newItem);
@@ -92,6 +105,17 @@ void JSONObj::addItem(const JSONItem &newItem)
     }
 
     items.append(item);
+}
+
+void JSONObj::addItem(const JSONType *value, const char *key)
+{
+    JSONItem item;
+    if (key == nullptr)
+        throw std::invalid_argument("JSON type need key!");
+    item.setKey(key);
+    item.setValue(value);
+
+    addItem(item);
 }
 
 void JSONObj::copyItems(const ItemVector &items)

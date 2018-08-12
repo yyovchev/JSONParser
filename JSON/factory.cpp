@@ -45,9 +45,6 @@ JSONType *Factory::CreateFromString(const String &string)
     cur = 0;
     initString(string);
 
-    if(jsFile[cur] != '{')
-        throw std::invalid_argument("invalid file content >> { exp");
-
     size = jsFile.getSize();
 
     obj = CreateNewItemValue();

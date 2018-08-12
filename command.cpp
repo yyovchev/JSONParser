@@ -31,8 +31,10 @@ JSONType* Command::getElement(const String &string, jsonTable &jt) const
     keys[0].append('\0');
     JSONType *json = jt.find(keys[0]);
 
-    if(!json)
+    if(!json){
+        keys[0].removenulls();
         throw std::invalid_argument(keys[0] + ": json is not created!");
+    }
 
     if (keys.getSize() == 1)
         return json;
@@ -42,8 +44,10 @@ JSONType* Command::getElement(const String &string, jsonTable &jt) const
     for (int i = 1; i<size; ++i){
         json = json->getElement(keys[i]);
 
-        if(!json)
+        if(!json){
+            keys[i].removenulls();
             throw std::invalid_argument(keys[i] + ": key not found!");
+        }
     }
 
     return json->clone();
@@ -80,8 +84,10 @@ Vector<String> Command::getKeys(const String &string)const
         keys.append(key);
     }
 
-    if (cur != size)
+    if (cur != size){
+        key.removenulls();
         throw std::invalid_argument(key + " missing ] !");
+    }
 
     return keys;
 }

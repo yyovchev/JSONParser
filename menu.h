@@ -10,12 +10,22 @@
 #include <iostream>
 #include <exception>
 
+//commands
+#include "commadcreate.h"
+#include "commanddelete.h"
+#include "commandprint.h"
+#include "commansswap.h"
+
 
 class Command;
 class Menu
 {
 public:
-    static Menu& getMenu();
+    static Menu& getMenu()
+    {
+        static Menu menu;
+        return menu;
+    }
 
 private:
     Menu();

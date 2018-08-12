@@ -79,18 +79,25 @@ void JSONArray::setOnKey(const String &key, JSONType *newValue)
     items[index] = newValue->clone();
 }
 
-void JSONArray::addItem(JSONType *item)
+void JSONArray::addItem(const JSONType *value, const char *key)
 {
-    JSONType *new_value = item->clone();
+    JSONType *new_value = value->clone();
     items.append(new_value);
+}
+
+void JSONArray::search(JSONType *fidnValues, const String &key) const
+{
+    int size = items.getSize();
+    for (int i =0; i<size; ++i)
+        items[i]->search(fidnValues, key);
 }
 
 bool JSONArray::isKeyValid(const String &key) const
 {
     int size = key.getSize();
 
-    for(int i = 0; i < size && key[i]; ++i)
-        if (key[i]<= '0' || key[i]>='9')
+    for(int i = 0; i < size; ++i)
+        if ((key[i]< '0' || key[i]>'9') && key[i] != '\0')
             return false;
 
     return true;
@@ -98,14 +105,20 @@ bool JSONArray::isKeyValid(const String &key) const
 
 int JSONArray::parseKey(const String &key) const
 {
-    if (!(isKeyValid(key)))
-        throw std::invalid_argument("Invalid key");
+    String msg(key);
+    msg.removenulls();
+    if (!(isKeyValid(key))){
+        msg += ": invalid key";
+        throw std::invalid_argument(msg);
+    }
 
     int index;
     sscanf(key, "%d", &index);
 
-    if(index > items.getSize())
-        throw std::invalid_argument("Invalid key");
+    if(index > items.getSize()){
+        msg += ": size error";
+        throw std::invalid_argument(msg);
+    }
 
     return index;
 }

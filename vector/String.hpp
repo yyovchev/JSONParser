@@ -69,6 +69,10 @@ public:
     bool operator !=(const char *str)const{
         return !(*this == str);
     }
+    void removenulls(){
+        while (size>=1 && data[size - 1] == '\0')
+            --size;
+    }
 };
 
 #endif

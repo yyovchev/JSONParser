@@ -20,8 +20,8 @@ public:
     virtual const JSONType* getElement(const String &key) const; // key must be a number
     virtual void print(std::ostream &out, bool pretty = true, int offset = 0) const;
     virtual void setOnKey(const String &key,JSONType *newValue);
-
-    void addItem(JSONType *item);
+    virtual void addItem(const JSONType* value, const char * key = nullptr);
+    virtual void search(JSONType *fidnValues, const String &key) const;
 
 private:
     bool isKeyValid(const String &key)const;

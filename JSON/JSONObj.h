@@ -22,8 +22,10 @@ public:
     virtual const JSONType* getElement(const String &key) const;
     virtual void print(std::ostream &out,bool pretty = true, int offset = 0) const;
     virtual void setOnKey(const String &key,JSONType *newValue);
+    virtual void search(JSONType* fidnValues, const String &key)const ;
 
     void addItem(const JSONItem& newItem);
+    virtual void addItem(const JSONType* value, const char * key = nullptr);
 
 
 private:
@@ -32,7 +34,7 @@ private:
     int checkID(const String &str)const;
     bool isKeyValid(const String &key)const;
     ItemVector getAllElement()const;
-    JSONObj operator=(const JSONObj&);
+    JSONObj& operator=(const JSONObj&) = delete;
 
 private:
     ItemVector items;

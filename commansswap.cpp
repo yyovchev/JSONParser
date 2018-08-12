@@ -45,8 +45,10 @@ JSONType* CommansSwap::getPevElent(const String &string, jsonTable &jt, String &
     keys[0].append('\0');
     JSONType *json = jt.find(keys[0]);
 
-    if(!json)
+    if(!json){
+        keys[0].removenulls();
         throw std::invalid_argument(keys[0] + ": json is not created!");
+    }
 
     if (keys.getSize() == 1)
         throw std::invalid_argument("jsons cant be swaped");
@@ -58,8 +60,11 @@ JSONType* CommansSwap::getPevElent(const String &string, jsonTable &jt, String &
         keys[i].append('\0');
         json = json->getElement(keys[i]);
 
-        if(!json)
+
+        if(!json){
+            keys[i].removenulls();
             throw std::invalid_argument(keys[i] + ": key not found!");
+        }
     }
 
     lastkey = keys[i];

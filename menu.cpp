@@ -11,12 +11,6 @@ Menu::~Menu()
     delete[] input;
 }
 
-Menu& Menu::getMenu()
-{
-    static Menu menu;
-    return menu;
-}
-
 void Menu::execute()
 {
 

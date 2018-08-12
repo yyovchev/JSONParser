@@ -90,7 +90,7 @@ bool JSONItem::isKeyValid(const String &key)
         bool Cl = (ch >= 'A' && ch <='Z');      //is capital letter
         bool Ll = (ch >= 'a' && ch <='z');      //is lowercase letter
         bool num = (ch >= '0' && ch<='9');     // numbers
-        bool other = (ch=='_' || ch =='-' || '\'' || '\"');
+        bool other = (ch=='_' || ch =='-' || '\'' || '\"' || " ");
         if (!(Cl || Ll || num || other))
             return false;
     }
